@@ -1,0 +1,1 @@
+// Model configuration representation boundary.

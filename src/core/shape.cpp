@@ -1,0 +1,1 @@
+// GPU-independent shape metadata.

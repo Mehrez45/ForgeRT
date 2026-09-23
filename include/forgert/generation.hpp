@@ -1,0 +1,1 @@
+// Public generation API boundary.

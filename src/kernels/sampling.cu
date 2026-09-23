@@ -1,0 +1,1 @@
+// Sampling CUDA kernel placeholder.
