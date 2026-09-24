@@ -31,3 +31,5 @@ profiles/
 results/
 *.ncu-rep
 *.nsys-rep
+
+/cuda_smoke
