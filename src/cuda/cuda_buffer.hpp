@@ -92,16 +92,16 @@ public:
 
     }
 
-    void copyToHost(T* destinationPtr, std::size_t resultCount){
-        if (resultCount == 0){
+    void copyToHost(T* destinationPtr, std::size_t elementCount) const {
+        if (elementCount == 0){
             return;   
         } else if (destinationPtr == nullptr) {
-            throw std::invalid_argument("The destination poiner must not be null");
-        } else if (resultCount > count){
+            throw std::invalid_argument("The destination pointer must not be null");
+        } else if (elementCount > count){
             throw std::out_of_range("Invalid argument - Result count exceeds buffer size");
         }
 
-        cudaError_t err = cudaMemcpy(destinationPtr, this->ptr_d, sizeof(T) * resultCount, cudaMemcpyDeviceToHost);
+        cudaError_t err = cudaMemcpy(destinationPtr, this->ptr_d, sizeof(T) * elementCount, cudaMemcpyDeviceToHost);
 
         if (err != cudaSuccess){
             throw std::runtime_error(
