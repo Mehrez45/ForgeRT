@@ -3,10 +3,12 @@
 #include <sstream>
 
 CudaContext::CudaContext(int deviceId) : deviceId(deviceId) {
+    if (deviceId < 0) throw std::invalid_argument("Invalid CUDA device ID");
+
     int count = device_count();
 
     if (count == 0) throw std::runtime_error("No CUDA devices found");
-    if (deviceId < 0 || deviceId >= count) throw std::runtime_error("Invalid CUDA device ID");
+    if (deviceId < 0 || deviceId >= count) throw std::invalid_argument("Invalid CUDA device ID");
 
     cudaError_t status = cudaSetDevice(deviceId);
     if (status != cudaSuccess) {
@@ -18,7 +20,7 @@ CudaContext::CudaContext(int deviceId) : deviceId(deviceId) {
         throw std::runtime_error(std::string("cudaGetDeviceProperties failed: ")
         + cudaGetErrorString(status));
     }
-
+    
 }
 
 int CudaContext::device_id() const noexcept {
